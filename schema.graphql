@@ -1,0 +1,11 @@
+type Parent @entity {
+  id: Bytes!
+  name: String!
+  children: [Child!]! @derivedFrom(field: "parent")
+}
+
+type Child @entity {
+  id: Bytes!
+  name: String!
+  parent: Parent!
+}

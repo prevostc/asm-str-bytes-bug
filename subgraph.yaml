@@ -1,0 +1,27 @@
+specVersion: 0.0.4
+description: remove me
+repository: https://github.com/prevostc/beefy-subgraphs
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SomeERC20
+    network: arbitrum-one
+    source:
+      address: '0xDa2307A45D298e855415675bF388e2bd64351D5b'
+      abi: IERC20
+      startBlock: 182836248
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7 # 0xgraph's version
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - Parent
+        - Child
+      abis:
+        - name: IERC20
+          file: ./abis/IERC20/IERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
